@@ -73,39 +73,7 @@
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
-        <div class="form-group">
-          <label for="size">Size</label>
-          <select name="size[]" class="form-control selectpicker"  multiple data-live-search="true">
-              <option value="">--Select any size--</option>
-              <option value="S">Small (S)</option>
-              <option value="M">Medium (M)</option>
-              <option value="L">Large (L)</option>
-              <option value="XL">Extra Large (XL)</option>
-              <option value="2XL">Double Extra Large (2XL)</option>
-              <option value="7US">7 US</option>
-              <option value="8US">8 US</option>
-              <option value="9US">9 US</option>
-              <option value="10US">10 US</option>
-              <option value="11US">11 US</option>
-              <option value="12US">12 US</option>
-              <option value="13US">13 US</option>
 
-
-
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="brand_id">Brand</label>
-          {{-- {{$brands}} --}}
-
-          <select name="brand_id" class="form-control">
-              <option value="">--Select Brand--</option>
-             @foreach($brands as $brand)
-              <option value="{{$brand->id}}">{{$brand->title}}</option>
-             @endforeach
-          </select>
-        </div>
 
         <div class="form-group">
           <label for="condition">Condition</label>

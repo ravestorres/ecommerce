@@ -84,7 +84,7 @@
         </div>
     </li>
 
-    {{-- Brands --}}
+    <!-- {{-- Brands --}}
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#brandCollapse" aria-expanded="true" aria-controls="brandCollapse">
           <i class="fas fa-table"></i>
@@ -97,7 +97,7 @@
             <a class="collapse-item" href="{{route('brand.create')}}">Add Brand</a>
           </div>
         </div>
-    </li>
+    </li> -->
 
     {{-- Shipping --}}
     <li class="nav-item">

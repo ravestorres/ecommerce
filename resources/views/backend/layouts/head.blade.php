@@ -9,12 +9,17 @@
     <title>Ecommerce Laravel || DASHBOARD</title>
   
     <!-- Custom fonts for this template-->
-    <link href="{{asset('backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-  
+    <link href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
     <!-- Custom styles for this template-->
-    <!-- Visit 'codeastro' for more projects -->
-    <link href="{{asset('backend/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('backend/css/sb-admin-2.min.css') }}" rel="stylesheet">
     @stack('styles')
-  
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+
 </head>
