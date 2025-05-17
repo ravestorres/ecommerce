@@ -599,7 +599,7 @@ Version:1.0
   position: relative;
 } */
 .header.shop .search-bar {
-  width: 300px;
+  width: 400px;
   height: 50px;
   display: inline-block;
   background: #fff;
@@ -909,7 +909,7 @@ Version:1.0
 .header.shop .nav li a {
   color: #fff;
   text-transform: capitalize;
-  font-size: 13px;
+  font-size: 14px;
   padding: 20px 10px;
   font-weight: 500;
   display: block;

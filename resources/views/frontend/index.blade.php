@@ -114,8 +114,8 @@
                         $after_discount = ($product->price - ($product->price * $product->discount) / 100);
                     @endphp
                     <div class="product-price">
-                        <span>${{number_format($after_discount, 2)}}</span>
-                        <del style="padding-left: 4%;">${{number_format($product->price, 2)}}</del>
+                        <span>₱{{number_format($after_discount, 2)}}</span>
+                        <del style="padding-left: 4%;">₱{{number_format($product->price, 2)}}</del>
                     </div>
                 </div>
             </div>
@@ -341,7 +341,7 @@
                                         @php
                                             $after_discount=($product->price-($product->price*$product->discount)/100);
                                         @endphp
-                                        <h3><small><del class="text-muted">${{number_format($product->price,2)}}</del></small>    ${{number_format($after_discount,2)}}  </h3>
+                                        <h3><small><del class="text-muted">₱{{number_format($product->price,2)}}</del></small>    ₱{{number_format($after_discount,2)}}  </h3>
                                         <div class="quickview-peragraph">
                                             <p>{!! html_entity_decode($product->summary) !!}</p>
                                         </div>
@@ -384,7 +384,7 @@
 <!-- Modal end -->
 @endsection
 
-@push('styles')
+<!-- @push('styles')
     <style>
         /* Banner Sliding */
         #Gslider .carousel-inner {
@@ -422,7 +422,7 @@
         bottom: 70px;
         }
     </style>
-@endpush
+@endpush -->
 
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
