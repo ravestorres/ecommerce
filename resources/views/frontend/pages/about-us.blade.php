@@ -33,16 +33,16 @@
 							<h3>Welcome To <span>Ecommerce Laravel</span></h3>
 							<p>@foreach($settings as $data) {{$data->description}} @endforeach</p>
 							<div class="button">
-								<a href="{{route('blog')}}" class="btn">Our Blog</a>
+								<!-- <a href="{{route('blog')}}" class="btn">Our Blog</a> -->
 								<a href="{{route('contact')}}" class="btn primary">Contact Us</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-6 col-12">
 						<div class="about-img overlay">
-							<div class="button">
-								<a href="https://www.youtube.com/watch?v=7edcgCdiHVU" class="video video-popup mfp-iframe"><i class="fa fa-play"></i></a>
-							</div>
+							<!-- <div class="button">
+								<a href="https://www.youtube.com/watch?v=B33a8YkS-hU" class="video video-popup mfp-iframe"><i class="fa fa-play"></i></a>
+							</div> -->
 							<img src="@foreach($settings as $data) {{$data->photo}} @endforeach" alt="@foreach($settings as $data) {{$data->photo}} @endforeach">
 						</div>
 					</div>
