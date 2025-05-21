@@ -111,40 +111,39 @@
                                                 </form>
                                             </li>
                                             <li>
-                                                <div class="sinlge-bar shopping">
-                                                    <!-- Same parent container as the cart -->
-                                                    <a href="{{route('wishlist')}}" class="single-icon"><i class="fa fa-heart-o"></i> <span class="total-count">{{Helper::wishlistCount()}}</span></a>
-                                                    <!-- Wishlist Modal Content -->
-                                                    @auth
-                                                        <div class="shopping-item"> 
-                                                            <div class="dropdown-cart-header">
-                                                                <span>{{count(Helper::getAllProductFromWishlist())}} Items</span>
-                                                                <a href="{{route('wishlist')}}">View Wishlist</a>
-                                                            </div>
-                                                            <ul class="shopping-list">
-                                                                @foreach(Helper::getAllProductFromWishlist() as $data)
-                                                                    @php
-                                                                        $photo=explode(',',$data->product['photo']);
-                                                                    @endphp
-                                                                    <li>
-                                                                        <a href="{{route('wishlist-delete',$data->id)}}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-                                                                        <a class="cart-img" href="#"><img src="{{$photo[0]}}" alt="{{$photo[0]}}"></a>
-                                                                        <h4><a href="{{route('product-detail',$data->product['slug'])}}" target="_blank">{{$data->product['title']}}</a></h4>
-                                                                        <p class="quantity">{{$data->quantity}} x - <span class="amount">₱{{number_format($data->price,2)}}</span></p>
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
-                                                            <div class="bottom">
-                                                                <div class="total">
-                                                                    <span>Total</span>
-                                                                    <span class="total-amount">₱{{number_format(Helper::totalWishlistPrice(),2)}}</span>
-                                                                </div>
-                                                                <a href="{{route('cart')}}" class="btn animate">Cart</a>
-                                                            </div>
-                                                        </div>
-                                                    @endauth
-                                                </div>
-                                            </li>
+    <div class="sinlge-bar shopping"> <!-- Same parent container as the cart -->
+        <a href="{{route('wishlist')}}" class="single-icon"><i class="fa fa-heart-o"></i> <span class="total-count">{{Helper::wishlistCount()}}</span></a>
+        <!-- Wishlist Modal Content -->
+        @auth
+            <div class="shopping-item"> 
+                <div class="dropdown-cart-header">
+                    <span>{{count(Helper::getAllProductFromWishlist())}} Items</span>
+                    <a href="{{route('wishlist')}}">View Wishlist</a>
+                </div>
+                <ul class="shopping-list">
+                    @foreach(Helper::getAllProductFromWishlist() as $data)
+                        @php
+                            $photo=explode(',',$data->product['photo']);
+                        @endphp
+                        <li>
+                            <a href="{{route('wishlist-delete',$data->id)}}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
+                            <a class="cart-img" href="#"><img src="{{$photo[0]}}" alt="{{$photo[0]}}"></a>
+                            <h4><a href="{{route('product-detail',$data->product['slug'])}}" target="_blank">{{$data->product['title']}}</a></h4>
+                            <p class="quantity">{{$data->quantity}} x - <span class="amount">${{number_format($data->price,2)}}</span></p>
+                        </li>
+                    @endforeach
+                </ul>
+                <div class="bottom">
+                    <div class="total">
+                        <span>Total</span>
+                        <span class="total-amount">${{number_format(Helper::totalWishlistPrice(),2)}}</span>
+                    </div>
+                    <a href="{{route('cart')}}" class="btn animate">Cart</a>
+                </div>
+            </div>
+        @endauth
+    </div>
+</li>
                                             <li>
                                                 {{-- <div class="sinlge-bar">
                                                 <a href="{{route('wishlist')}}" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
@@ -168,14 +167,14 @@
                                                                                 <a href="{{route('cart-delete',$data->id)}}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
                                                                                 <a class="cart-img" href="#"><img src="{{$photo[0]}}" alt="{{$photo[0]}}"></a>
                                                                                 <h4><a href="{{route('product-detail',$data->product['slug'])}}" target="_blank">{{$data->product['title']}}</a></h4>
-                                                                                <p class="quantity">{{$data->quantity}} x - <span class="amount">₱{{number_format($data->price,2)}}</span></p>
+                                                                                <p class="quantity">{{$data->quantity}} x - <span class="amount">${{number_format($data->price,2)}}</span></p>
                                                                             </li>
                                                                     @endforeach
                                                             </ul>
                                                             <div class="bottom">
                                                                 <div class="total">
                                                                     <span>Total</span>
-                                                                    <span class="total-amount">₱{{number_format(Helper::totalCartPrice(),2)}}</span>
+                                                                    <span class="total-amount">${{number_format(Helper::totalCartPrice(),2)}}</span>
                                                                 </div>
                                                                 <a href="{{route('checkout')}}" class="btn animate">Checkout</a>
                                                             </div>
@@ -208,3 +207,59 @@
     </div>
     <!--/ End Header Inner -->
 </header>
+
+
+@push('styles')
+<style> 
+
+
+    /* Show wishlist/cart dropdown on hover */
+.sinlge-bar.shopping:hover > .shopping-item {
+    display: block !important; /* override any inline styles */
+}
+
+/* Dropdown styling */
+.shopping-item {
+    display: none; /* hidden by default */
+    position: absolute;
+    right: 0;
+    background: white;
+    width: 320px;
+    max-height: 400px; /* limit height */
+    overflow-y: auto; /* enable vertical scrolling */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    z-index: 9999;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+/* Ensure the dropdown is inside its relative container */
+.sinlge-bar.shopping {
+    position: relative;
+}
+
+/* Optional: scroll bar style */
+.shopping-item::-webkit-scrollbar {
+    width: 6px;
+}
+
+.shopping-item::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+
+/* Optional: fix shopping-list li layout */
+.shopping-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.shopping-list li .cart-img img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+</style>

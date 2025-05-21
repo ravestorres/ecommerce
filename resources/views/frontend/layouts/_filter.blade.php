@@ -5,4 +5,4 @@
 <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#hello" role="tab">{{$category->title}}</a></li>
     @endforeach
 </ul>
-@endif
+@endif+

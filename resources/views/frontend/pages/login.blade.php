@@ -6,11 +6,11 @@
     <!-- Breadcrumbs -->
     <div class="breadcrumbs">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
                     <div class="bread-inner">
-                        <ul class="bread-list">
-                            <li><a href="{{route('home')}}">Home<i class="ti-arrow-right"></i></a></li>
+                        <ul class="bread-list d-inline-block">
+                            <li><a href="{{route('home')}}">Home <i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="javascript:void(0);">Login</a></li>
                         </ul>
                     </div>
@@ -23,52 +23,38 @@
     <!-- Shop Login -->
     <section class="shop login section">
         <div class="container">
-            <div class="row"> 
-                <div class="col-lg-6 offset-lg-3 col-12">
-                    <div class="login-form">
+            <div class="row justify-content-center"> 
+                <div class="col-lg-5 col-md-7 col-12">
+                    <div class="login-form text-center">
                         <h2>Login</h2>
                         <!-- Form -->
                         <form class="form" method="post" action="{{route('login.submit')}}">
                             @csrf
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label>Your Email<span>*</span></label>
-                                        <input type="email" name="email" placeholder="" required="required" value="{{old('email')}}">
-                                        @error('email')
-                                            <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label>Your Password<span>*</span></label>
-                                        <input type="password" name="password" placeholder="" required="required" value="{{old('password')}}">
-                                        @error('password')
-                                            <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group login-btn">
-                                        <button class="btn btn-facebook" type="submit">Login</button>
-                                        <a href="{{route('register.form')}}" class="btn">Register</a>
-                                        <!-- OR
-                                        <a href="{{route('login.redirect','facebook')}}" class="btn btn-facebook"><i class="ti-facebook"></i></a>
-                                        <a href="{{route('login.redirect','github')}}" class="btn btn-github"><i class="ti-github"></i></a>
-                                        <a href="{{route('login.redirect','google')}}" class="btn btn-google"><i class="ti-google"></i></a> -->
-
-                                    </div>
-                                    <div class="checkbox">
-                                        <label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">Remember me</label>
-                                    </div>
-                                    @if (Route::has('password.request'))
-                                        <a class="lost-pass" href="{{ route('password.reset') }}">
-                                            Lost your password?
-                                        </a>
-                                    @endif
-                                </div>
+                            <div class="form-group text-left">
+                                <label>Email <span>*</span></label>
+                                <input type="email" name="email" placeholder="" required="required" value="{{old('email')}}" class="form-control">
+                                @error('email')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
+
+                            <div class="form-group text-left">
+                                <label>Password <span>*</span></label>
+                                <input type="password" name="password" placeholder="" required="required" value="{{old('password')}}" class="form-control">
+                                @error('password')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+
+
+                           <div class="form-group text-center">
+    <button class="btn btn-red" type="submit">Login</button>
+</div>
+
+<div class="form-group text-center mt-3">
+    <a href="{{route('register.form')}}" class="btn btn-black">Register</a>
+</div>
+
                         </form>
                         <!--/ End Form -->
                     </div>
@@ -80,28 +66,62 @@
 @endsection
 @push('styles')
 <style>
-    .shop.login .form .btn{
-        margin-right:0;
+    .login-form {
+        max-width: 100%;
     }
-    .btn-facebook{
-        background:#39579A;
+
+    .login-form h2 {
+        margin-bottom: 25px;
+        font-weight: 700;
     }
-    .btn-facebook:hover{
-        background:#073088 !important;
+
+    .form-group label {
+        font-weight: 600;
     }
-    .btn-github{
-        background:#444444;
-        color:white;
+
+    .btn-red {
+        background-color: #ec2a32;
+        color: white;
+        padding: 10px 40px;
+        font-size: 18px;
+        border: none;
+        border-radius: 4px;
+        transition: background 0.3s ease;
     }
-    .btn-github:hover{
-        background:black !important;
+
+    .btn-red:hover {
+        background-color: #c9242b;
     }
-    .btn-google{
-        background:#ea4335;
-        color:white;
+
+    .btn-black {
+        background-color: #000;
+        color: #fff;
+        padding: 8px 30px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: background 0.3s ease;
     }
-    .btn-google:hover{
-        background:rgb(243, 26, 26) !important;
+
+    .btn-black:hover {
+        background-color: #333;
+    }
+
+    .bread-list li {
+        display: inline;
+        font-weight: 600;
+        color: #333;
+        margin-right: 6px;
+    }
+
+    .bread-list li a {
+        color: #333;
+        text-decoration: none;
+    }
+
+    .bread-list li.active a {
+        color: #39579A;
+        pointer-events: none;
     }
 </style>
 @endpush

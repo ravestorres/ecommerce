@@ -10,13 +10,19 @@ use App\Models\Post;
 use App\Models\Cart;
 use App\Models\Brand;
 use App\User;
-use Auth;
-use Session;
-use Newsletter;
-use DB;
-use Hash;
+// use Auth;
+// use Session;
+use Illuminate\Spatie\Newsletter\Newsletter;
+
+// use DB;
+// use Hash;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
 class FrontendController extends Controller
 {
    
@@ -413,6 +419,7 @@ class FrontendController extends Controller
                     return redirect()->route('home');
                 }
                 else{
+                    
                     Newsletter::getLastError();
                     return back()->with('error','Something went wrong! please try again');
                 }
