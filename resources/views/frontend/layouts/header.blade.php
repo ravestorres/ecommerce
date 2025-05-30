@@ -9,14 +9,13 @@
                     <!-- Top Right -->
                     <div class="right-content">
                         <ul class="list-main">
-                            {{-- <li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li> --}}
                             @auth 
                                 @if(Auth::user()->role=='admin')
                                     <li><i class="fa fa-truck"></i> <a href="{{route('order.track')}}">Track Order</a></li>
-                                    <li><i class="ti-user"></i> <a href="{{route('admin')}}"  target="_blank">Dashboard</a></li>
+                                    <li><i class="ti-user"></i> <a href="{{route('admin')}}" target="_blank">Dashboard</a></li>
                                 @else 
                                     <li><i class="fa fa-truck"></i> <a href="{{route('order.track')}}">Track Order</a></li>
-                                    <li><i class="ti-user"></i> <a href="{{route('user')}}"  target="_blank">Dashboard</a></li>
+                                    <li><i class="ti-user"></i> <a href="{{route('user')}}" target="_blank">Dashboard</a></li>
                                 @endif
                             @endauth
                         </ul>
@@ -27,29 +26,26 @@
         </div>
     </div>
     <!-- End Topbar -->
+    
     <div class="middle-inner">
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 col-md-2 col-12">
-                    
-                    <!-- Search Form -->
                     <div class="search-top">
                         <div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
-                        <!-- Search Form -->
                         <div class="search-top">
                             <form class="search-form">
                                 <input type="text" placeholder="Search here..." name="search">
                                 <button value="search" type="submit"><i class="ti-search"></i></button>
                             </form>
                         </div>
-                        <!--/ End Search Form -->
                     </div>
-                    <!--/ End Search Form -->
                     <div class="mobile-nav"></div>
                 </div>
             </div>
         </div>
     </div>
+    
     <!-- Header Inner -->
     <div class="header-inner">
         <div class="container">
@@ -57,27 +53,22 @@
                 <div class="row">
                     <div class="col-lg-12 col-12">
                         <div class="menu-area">
-                            <!-- Main Menu -->
                             <nav class="navbar navbar-expand-lg">
-                                <div class="navbar-collapse">	
+                                <div class="navbar-collapse">    
                                     <div class="nav-inner">
                                         <div class="logo">
                                             @php
                                                 $settings = DB::table('settings')->first();
                                             @endphp
                                             <a href="{{ route('home') }}">
-                                                <img 
-                                                    src="{{ $settings && $settings->logo ? asset($settings->logo) : asset('default-logo.png') }}" 
-                                                    alt="logo" 
-                                                    class="logo-default"
-                                                    style="height:30px; max-width:100px;"
-                                                >
-                                                <img 
-                                                    src="{{ $settings && $settings->logo2 ? asset($settings->logo2) : asset('default-logo2.png') }}" 
-                                                    alt="logo scrolled" 
-                                                    class="logo-scrolled"
-                                                    style="height:30px; max-width:100px; display:none;"
-                                                >
+                                                <img src="{{ $settings && $settings->logo ? asset($settings->logo) : asset('default-logo.png') }}" 
+                                                     alt="logo" 
+                                                     class="logo-default"
+                                                     style="height:30px; max-width:100px;">
+                                                <img src="{{ $settings && $settings->logo2 ? asset($settings->logo2) : asset('default-logo2.png') }}" 
+                                                     alt="logo scrolled" 
+                                                     class="logo-scrolled"
+                                                     style="height:30px; max-width:100px; display:none;">
                                             </a>
                                         </div>
                                         <script>
@@ -98,9 +89,10 @@
                                         <ul class="nav main-menu menu navbar-nav">
                                             <li class="{{Request::path()=='home' ? 'active' : ''}}"><a href="{{route('home')}}">Home</a></li>
                                             <li class="{{Request::path()=='about-us' ? 'active' : ''}}"><a href="{{route('about-us')}}">About Us</a></li>
-                                            <li class="@if(Request::path()=='product-grids'||Request::path()=='product-lists')  active  @endif"><a href="{{route('product-grids')}}">Products</a><span class="new">New</span></li>												
-                                                {{Helper::getHeaderCategory()}}								
-                                               
+                                            <li class="@if(Request::path()=='product-grids'||Request::path()=='product-lists') active @endif">
+                                                <a href="{{route('product-grids')}}">Products</a><span class="new">New</span>
+                                            </li>                                                
+                                            {{Helper::getHeaderCategory()}}                                
                                             <li class="{{Request::path()=='contact' ? 'active' : ''}}"><a href="{{route('contact')}}">Contact Us</a></li>
 
                                             <li class="search-bar">
@@ -110,156 +102,299 @@
                                                     <button class="btnn" type="submit"><i class="ti-search"></i></button>
                                                 </form>
                                             </li>
-                                            <li>
-    <div class="sinlge-bar shopping"> <!-- Same parent container as the cart -->
-        <a href="{{route('wishlist')}}" class="single-icon"><i class="fa fa-heart-o"></i> <span class="total-count">{{Helper::wishlistCount()}}</span></a>
-        <!-- Wishlist Modal Content -->
+<!-- Wishlist -->
+<li>
+    <div class="sinlge-bar shopping">
+        <a href="{{route('wishlist')}}" class="single-icon">
+            <i class="fa fa-heart-o"></i>
+            <span class="total-count">{{Helper::wishlistCount()}}</span>
+        </a>
         @auth
-            <div class="shopping-item"> 
-                <div class="dropdown-cart-header">
-                    <span>{{count(Helper::getAllProductFromWishlist())}} Items</span>
-                    <a href="{{route('wishlist')}}">View Wishlist</a>
-                </div>
+        <div class="shopping-item">
+            <div class="dropdown-cart-header">
+                <span>{{count(Helper::getAllProductFromWishlist())}} Items</span>
+                <a href="{{route('wishlist')}}">View Wishlist</a>
+            </div>
+            <div class="scrollable-list">
                 <ul class="shopping-list">
                     @foreach(Helper::getAllProductFromWishlist() as $data)
-                        @php
-                            $photo=explode(',',$data->product['photo']);
-                        @endphp
+                        @php $photo = explode(',', $data->product['photo']); @endphp
                         <li>
-                            <a href="{{route('wishlist-delete',$data->id)}}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-                            <a class="cart-img" href="#"><img src="{{$photo[0]}}" alt="{{$photo[0]}}"></a>
-                            <h4><a href="{{route('product-detail',$data->product['slug'])}}" target="_blank">{{$data->product['title']}}</a></h4>
-                            <p class="quantity">{{$data->quantity}} x - <span class="amount">${{number_format($data->price,2)}}</span></p>
+                            <a href="{{route('wishlist-delete',$data->id)}}" class="remove" title="Remove this item">
+                                <i class="fa fa-times"></i>
+                            </a>
+                            <div class="cart-img">
+                                <img src="{{$photo[0]}}" alt="{{$photo[0]}}">
+                            </div>
+                            <div class="product-info">
+                                <h4>
+                                    <a href="{{route('product-detail',$data->product['slug'])}}" style="background: none !important; color: #333;">
+                                        {{$data->product['title']}}
+                                    </a>
+                                </h4>
+                                <div class="quantity-price">
+                                    <span class="quantity">{{$data->quantity}} x ${{number_format($data->price,2)}}</span>
+                                </div>
+                                <div class="final-price-row">
+                                    <span class="final-price">${{number_format($data->quantity * $data->price, 2)}}</span>
+                                </div>
+                            </div>
                         </li>
                     @endforeach
                 </ul>
-                <div class="bottom">
-                    <div class="total">
-                        <span>Total</span>
-                        <span class="total-amount">${{number_format(Helper::totalWishlistPrice(),2)}}</span>
-                    </div>
-                    <a href="{{route('cart')}}" class="btn animate">Cart</a>
-                </div>
             </div>
+            <div class="bottom">
+                <div class="total">
+                    <span>Total:</span>
+                    <span class="total-amount">${{number_format(Helper::totalWishlistPrice(),2)}}</span>
+                </div>
+                <a href="{{route('cart')}}" class="btn checkout-btn">View Cart</a>
+            </div>
+        </div>
         @endauth
     </div>
 </li>
-                                            <li>
-                                                {{-- <div class="sinlge-bar">
-                                                <a href="{{route('wishlist')}}" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                                                </div> --}}
-                                                <div class="sinlge-bar shopping">
-                                                    <a href="{{route('cart')}}" class="single-icon"><i class="ti-bag"></i> <span class="total-count">{{Helper::cartCount()}}</span></a>
-                                                    <!-- Shopping Item -->
-                                                    @auth
-                                                        <div class="shopping-item">
-                                                            <div class="dropdown-cart-header">
-                                                                <span>{{count(Helper::getAllProductFromCart())}} Items</span>
-                                                                <a href="{{route('cart')}}">View Cart</a>
-                                                            </div>
-                                                            <ul class="shopping-list">
-                                                                {{-- {{Helper::getAllProductFromCart()}} --}}
-                                                                    @foreach(Helper::getAllProductFromCart() as $data)
-                                                                            @php
-                                                                                $photo=explode(',',$data->product['photo']);
-                                                                            @endphp
-                                                                            <li>
-                                                                                <a href="{{route('cart-delete',$data->id)}}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-                                                                                <a class="cart-img" href="#"><img src="{{$photo[0]}}" alt="{{$photo[0]}}"></a>
-                                                                                <h4><a href="{{route('product-detail',$data->product['slug'])}}" target="_blank">{{$data->product['title']}}</a></h4>
-                                                                                <p class="quantity">{{$data->quantity}} x - <span class="amount">${{number_format($data->price,2)}}</span></p>
-                                                                            </li>
-                                                                    @endforeach
-                                                            </ul>
-                                                            <div class="bottom">
-                                                                <div class="total">
-                                                                    <span>Total</span>
-                                                                    <span class="total-amount">${{number_format(Helper::totalCartPrice(),2)}}</span>
-                                                                </div>
-                                                                <a href="{{route('checkout')}}" class="btn animate">Checkout</a>
-                                                            </div>
-                                                        </div>
-                                                    @endauth
-                                                <!--/ End Shopping Item -->
-                                            </li>
-                                            @auth
-                                                <li>
-                                                    <a href="{{route('user.logout')}}">Logout</a>
-                                                </li>
-                                            @else
-                                                <li>
-                                                    <a href="{{route('login.form')}}">Login</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{route('register.form')}}">Register</a>
-                                                </li>
-                                            @endauth
-                                        </ul>
-                                    </div>
+
+<!-- Cart -->
+<li>
+    <div class="sinlge-bar shopping">
+        <a href="{{route('cart')}}" class="single-icon">
+            <i class="ti-bag"></i>
+            <span class="total-count">{{Helper::cartCount()}}</span>
+        </a>
+        @auth
+        <div class="shopping-item">
+            <div class="dropdown-cart-header">
+                <span>{{count(Helper::getAllProductFromCart())}} Items</span>
+                <a href="{{route('cart')}}">View Cart</a>
+            </div>
+            <div class="scrollable-list">
+                <ul class="shopping-list">
+                    @foreach(Helper::getAllProductFromCart() as $data)
+                        @php $photo = explode(',', $data->product['photo']); @endphp
+                        <li>
+                            <a href="{{route('cart-delete',$data->id)}}" class="remove" title="Remove this item">
+                                <i class="fa fa-times"></i>
+                            </a>
+                            <div class="cart-img">
+                                <img src="{{$photo[0]}}" alt="{{$photo[0]}}">
+                            </div>
+                            <div class="product-info">
+                                <h4>{{$data->product['title']}}</h4>
+                                <div class="quantity-price">
+                                    <span class="quantity">{{$data->quantity}} x ${{number_format($data->price,2)}}</span>
                                 </div>
-                            </nav>
-                            <!--/ End Main Menu -->	
-                        </div>
-                    </div>
+                                <div class="final-price-row">
+                                    <span class="final-price">${{number_format($data->quantity * $data->price, 2)}}</span>
+                                </div>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="bottom">
+                <div class="total">
+                    <span>Total:</span>
+                    <span class="total-amount">${{number_format(Helper::totalCartPrice(),2)}}</span>
                 </div>
+                <a href="{{route('checkout')}}" class="btn checkout-btn">Checkout</a>
             </div>
         </div>
+        @endauth
     </div>
+</li>
+
+@auth
+    <li><a href="{{route('user.logout')}}">Logout</a></li>
+@else
+    <li><a href="{{route('login.form')}}">Login</a></li>
+    <li><a href="{{route('register.form')}}">Register</a></li>
+@endauth
     <!--/ End Header Inner -->
 </header>
-
-
 @push('styles')
-<style> 
-
-
-    /* Show wishlist/cart dropdown on hover */
-.sinlge-bar.shopping:hover > .shopping-item {
-    display: block !important; /* override any inline styles */
+<style>
+/* Wishlist & Cart Dropdown Styles */
+.sinlge-bar.shopping {
+    position: relative;
+    display: inline-block;
+    margin: 0 10px;
+    padding: 5px 0;
 }
 
-/* Dropdown styling */
+/* Shared Dropdown Container */
 .shopping-item {
-    display: none; /* hidden by default */
     position: absolute;
     right: 0;
-    background: white;
-    width: 320px;
-    max-height: 400px; /* limit height */
-    overflow-y: auto; /* enable vertical scrolling */
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-    z-index: 9999;
-    border-radius: 5px;
-    padding: 10px 15px;
+    top: 100%;
+    width: 350px;
+    background: #fff;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    z-index: 1000;
+    display: none;
+    overflow: hidden; /* Added */
 }
 
-/* Ensure the dropdown is inside its relative container */
-.sinlge-bar.shopping {
+.sinlge-bar.shopping:hover .shopping-item {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollable List Container */
+.scrollable-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 0 15px;
+}
+
+/* Header */
+.dropdown-cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 2;
+}
+
+/* Product List */
+.shopping-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.shopping-list li {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px 0 15px 35px; /* Updated to leave space for remove icon */
+    border-bottom: 1px solid #f5f5f5;
     position: relative;
 }
 
-/* Optional: scroll bar style */
-.shopping-item::-webkit-scrollbar {
+/* Remove Button */
+.remove {
+    position: absolute;
+    left: 5px; /* Visible on the left */
+    top: 20px; /* Aligned vertically */
+    color: #ff4d4d;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: all 0.2s;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.remove:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Product Image */
+.cart-img {
+    flex: 0 0 60px;
+    height: 60px;
+    margin-right: 15px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.cart-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Product Info */
+.product-info {
+    flex: 1;
+    min-width: 0;
+    display: flex; /* Make vertical layout */
+    flex-direction: column;
+    justify-content: space-between; /* Push price to bottom */
+}
+
+.product-info h4 {
+    margin: 0 0 6px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-info h4 a {
+    background: none !important; /* Remove black background */
+    color: #333;
+    text-decoration: none;
+}
+
+.quantity-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quantity-price {
+    font-size: 13px;
+    color: #666;
+}
+
+.final-price-row {
+    margin-top: 8px;
+}
+
+.final-price {
+    font-weight: 700;
+    color: #e63946;
+    font-size: 14px;
+}
+
+/* Footer */
+.bottom {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    position: sticky;
+    bottom: 0;
+    background: white;
+    z-index: 2;
+}
+.scrollable-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 0 15px;
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 #f1f1f1;
+}
+.scrollable-list::-webkit-scrollbar {
     width: 6px;
 }
-
-.shopping-item::-webkit-scrollbar-thumb {
-    background-color: rgba(0,0,0,0.2);
-    border-radius: 3px;
+.scrollable-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
 }
-
-/* Optional: fix shopping-list li layout */
-.shopping-list li {
+.scrollable-list::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+.scrollable-list::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+.bottom .total {
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    justify-content: space-between;
+    font-weight: 600;
+    color: #333;
 }
-
-.shopping-list li .cart-img img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    margin-right: 10px;
-}
-
 </style>
+@endpush

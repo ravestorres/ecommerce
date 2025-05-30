@@ -67,14 +67,13 @@
                                     @enderror
                                 </div>
                             </div>
-                         <div class="col-12 text-center">
-    <button class="btn btn-red" type="submit">Register</button>
-</div>
-
-<div class="col-12 text-center mt-3">
-    <a href="{{route('login.form')}}" class="btn btn-dark">Back to Login</a>
-</div>
-
+                            <div class="col-12 text-center">
+                                <button class="btn btn-register" type="submit">Register</button>
+                            </div>
+                            <div class="col-12 text-center mt-3">
+                                <a href="{{route('login.form')}}" class="btn btn-login">Back to Login</a>
+                            </div>
+                        </div>
                     </form>
                     <!--/ End Form -->
                 </div>
@@ -87,31 +86,99 @@
 
 @push('styles')
 <style>
-    .btn-red {
-        background-color: #ec2a32;
-        color: white;
-        padding: 10px 25px;
-        border: none;
+    /* REGISTER BUTTON STYLES */
+    .btn-register {
+        background-color: white;
+        color: #ec2a32 !important;
+        padding: 12px 30px;
+        font-size: 16px;
+        font-weight: 600;
+        border: 2px solid #ec2a32;
         border-radius: 4px;
-        transition: background 0.3s ease;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(236, 42, 50, 0.3);
     }
 
-    .btn-red:hover {
-        background-color: #c9242b;
+    .btn-register:hover {
+        background-color: #ec2a32 !important;
+        color: white !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(236, 42, 50, 0.4);
     }
 
-    .btn-dark {
-        background-color: #000;
-        color: #fff;
-        padding: 10px 25px;
+    /* LOGIN BUTTON STYLES */
+    .btn-login {
+        background-color: #FFF;
+        color: black !important;
+        padding: 10px 30px;
+        font-size: 16px;
+        font-weight: 600;
+        border: 2px solid #000;
         border-radius: 4px;
-        transition: background 0.3s ease;
+        transition: all 0.3s ease;
     }
 
-    .btn-dark:hover {
-        background-color: #333;
+    .btn-login:hover {
+        background-color: black !important;
+        color: #fff !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* General form styles */
+    .login-form {
+        padding: 30px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .login-form h2 {
+        margin-bottom: 25px;
+        font-weight: 700;
+        color: #333;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        color: #555;
+    }
+
+    .bread-list li {
+        display: inline;
+        font-weight: 600;
+        color: #333;
+        margin-right: 6px;
+    }
+
+    .bread-list li a {
+        color: #333;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .bread-list li a:hover {
+        color: #ec2a32;
+    }
+
+    .bread-list li.active a {
+        color: #39579A;
+        pointer-events: none;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        transition: border 0.3s ease;
+    }
+
+    input:focus {
+        border-color: #ec2a32;
+        box-shadow: 0 0 0 0.2rem rgba(236,42,50,0.25);
     }
 </style>
 @endpush
-
-

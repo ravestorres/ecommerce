@@ -119,7 +119,15 @@
                                                 @php
                                                     $org=($product->price-($product->price*$product->discount)/100);
                                                 @endphp
-                                                <p class="price"><del class="text-muted">${{number_format($product->price,2)}}</del>   ${{number_format($org,2)}}  </p>                                                
+                                              <p class="price">
+    @php
+        $org = ($product->price - ($product->price * $product->discount)/100);
+    @endphp
+    @if($product->discount > 0 && $org != $product->price)
+        <del class="text-muted">${{number_format($product->price,2)}}</del>
+    @endif
+    ${{number_format($org,2)}}
+</p>
                                             </div>
                                         </div>
                                         <!-- End Single Post -->
@@ -127,7 +135,7 @@
                                 </div>
                                 <!--/ End Single Widget -->
                                 <!-- Single Widget -->
-                                <div class="single-widget category">
+                                <!-- <div class="single-widget category">
                                     <h3 class="title">Brands</h3>
                                     <ul class="categor-list">
                                         @php
@@ -138,8 +146,8 @@
                                         @endforeach
                                     </ul>
                                 </div>
-                                <!--/ End Single Widget -->
-                        	</div>
+                                </ End Single Widget -->
+                        	</div> 
 						</div>
 						<div class="col-lg-9 col-md-8 col-12">
 							<div class="row">
@@ -209,12 +217,14 @@
 													<div class="list-content">
 														<div class="product-content">
 															<div class="product-price">
-																@php
-																	$after_discount=($product->price-($product->price*$product->discount)/100);
-																@endphp
-																<span>${{number_format($after_discount,2)}}</span>
-																<del>${{number_format($product->price,2)}}</del>
-															</div>
+    @php
+        $after_discount = ($product->price - ($product->price * $product->discount)/100);
+    @endphp
+    <span>${{number_format($after_discount,2)}}</span>
+    @if($product->discount > 0 && $after_discount != $product->price)
+        <del>${{number_format($product->price,2)}}</del>
+    @endif
+</div>
 															<h3 class="title"><a href="{{route('product-detail',$product->slug)}}">{{$product->title}}</a></h3>
 														{{-- <p>{!! html_entity_decode($product->summary) !!}</p> --}}
 														</div>
@@ -303,9 +313,14 @@
 													</div>
 												</div>
 												@php
-													$after_discount=($product->price-($product->price*$product->discount)/100);
-												@endphp
-												<h3><small><del class="text-muted">${{number_format($product->price,2)}}</del></small>    ${{number_format($after_discount,2)}}  </h3>
+    $after_discount = ($product->price - ($product->price * $product->discount)/100);
+@endphp
+<h3>
+    @if($product->discount > 0 && $after_discount != $product->price)
+        <small><del class="text-muted">${{number_format($product->price,2)}}</del></small>
+    @endif
+    ${{number_format($after_discount,2)}}
+</h3>
 												<div class="quickview-peragraph">
 													<p>{!! html_entity_decode($product->summary) !!}</p>
 												</div>
